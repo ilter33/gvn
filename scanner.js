@@ -3,7 +3,7 @@ export async function scanURL(url, vulnerabilityType) {
     const repoPath = url.replace('https://github.com/', '').split('/blob/')[0];
     const response = await fetch(`https://api.github.com/repos/${repoPath}/code-scanning/alerts`, {
       headers: {
-        'Authorization': 'token YOUR_GITHUB_TOKEN',
+        'Authorization': 'token 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',
         'Accept': 'application/vnd.github.v3+json'
       }
     });
