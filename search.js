@@ -6,7 +6,7 @@ export async function search(dork, engine) {
   try {
     const response = await fetch(`${searchEngines[engine]}${encodeURIComponent(dork)}+in:file&per_page=10`, {
       headers: {
-        'Authorization': 'token YOUR_GITHUB_TOKEN', // GitHub Token ekleyin
+        'Authorization': 'token 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', // GitHub Token ekleyin
         'Accept': 'application/vnd.github.v3+json'
       }
     });
