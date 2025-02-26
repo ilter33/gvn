@@ -1,102 +1,264 @@
+:root {
+  --matrix-green: #00ff00;
+  --matrix-dark: #001a00;
+  --matrix-black: #000000;
+  --danger-red: #ff0033;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+}
+
 body {
-    background: #000;
-    color: #0f0;
-    font-family: 'Courier New', monospace;
-    margin: 0;
-    overflow-x: hidden;
+  background: var(--matrix-black);
+  color: var(--matrix-green);
+  padding: 20px;
 }
 
-.matrix-container {
-    position: fixed;
-    z-index: -1;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.nav-menu {
-    padding: 20px;
-    text-align: center;
-    background: rgba(0, 30, 0, 0.8);
+.matrix-header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  text-shadow: 0 0 10px var(--matrix-green);
 }
 
-.nav-menu a {
-    color: #0f0;
-    text-decoration: none;
-    margin: 0 15px;
-    padding: 5px 10px;
-    border: 1px solid #0f0;
+.controls {
+  background: rgba(0, 26, 0, 0.8);
+  padding: 20px;
+  border: 1px solid var(--matrix-green);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.nav-menu a.active {
-    background: #0f0;
-    color: #000;
+select, button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: 1px solid var(--matrix-green);
+  border-radius: 4px;
+  background: var(--matrix-dark);
+  color: var(--matrix-green);
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 400px;
 }
 
-.page {
-    padding: 20px;
-    display: none;
+select {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.page.visible {
-    display: block;
+select:hover:not(:disabled),
+button:hover:not(:disabled) {
+  background: var(--matrix-green);
+  color: var(--matrix-black);
+  box-shadow: 0 0 10px var(--matrix-green);
 }
 
-.input-group {
-    margin: 20px 0;
-}
-
-select, input {
-    background: #000;
-    color: #0f0;
-    border: 1px solid #0f0;
-    padding: 10px;
-    margin: 5px;
-    width: 300px;
+select:disabled, button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .button-group {
-    margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
 }
 
-button {
-    background: #000;
-    color: #0f0;
-    border: 1px solid #0f0;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 5px;
+.start-btn {
+  background: var(--matrix-green);
+  color: var(--matrix-black);
 }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.stop-btn {
+  background: var(--danger-red);
+  color: var(--matrix-black);
+  border-color: var(--danger-red);
 }
 
-.console {
-    background: rgba(0, 20, 0, 0.9);
-    border: 1px solid #0f0;
-    padding: 20px;
-    height: 400px;
-    overflow-y: auto;
-    white-space: pre-wrap;
+.stop-btn:hover:not(:disabled) {
+  background: var(--danger-red);
+  color: var(--matrix-black);
+  box-shadow: 0 0 10px var(--danger-red);
 }
 
-.entry, .attack-step {
-    margin: 5px 0;
-    padding: 5px;
+.search-engines {
+  margin: 15px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
 }
 
-.info { color: #0f0; }
-.success { color: #0f0; }
-.warning { color: #ff0; }
-.error { color: #f00; }
+.search-engines label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.console-window {
+  background: rgba(0, 26, 0, 0.8);
+  padding: 20px;
+  border: 1px solid var(--matrix-green);
+  border-radius: 8px;
+  height: 600px;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.console-title {
+  border-bottom: 1px solid var(--matrix-green);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.console-content {
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.entry {
+  margin: 5px 0;
+  padding: 5px;
+  border-left: 3px solid var(--matrix-green);
+  animation: fadeIn 0.3s ease;
+}
+
+.vulnerable-link {
+  background: rgba(255, 0, 0, 0.1);
+  border-left: 3px solid var(--danger-red);
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.vulnerable-link:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.nav-menu a {
+  color: var(--matrix-green);
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid var(--matrix-green);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  background: var(--matrix-green);
+  color: var(--matrix-black);
+  box-shadow: 0 0 10px var(--matrix-green);
+}
+
+.matrix-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  margin: 5px;
+  background: var(--matrix-dark);
+  border: 1px solid var(--matrix-green);
+  border-radius: 4px;
+  color: var(--matrix-green);
+  font-family: 'Courier New', monospace;
+}
+
+.matrix-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--matrix-green);
+}
+
+#exploit-page {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#exploit-page.visible {
+  opacity: 1;
+}
+
+.attack-step {
+  padding: 5px 10px;
+  margin: 5px 0;
+  border-left: 3px solid var(--matrix-green);
+}
+
+.attack-step.success {
+  border-left-color: #00ff00;
+}
+
+.attack-step.warning {
+  border-left-color: #ffff00;
+}
+
+.attack-step.error {
+  border-left-color: var(--danger-red);
+}
 
 .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0;
+  width: 100%;
+  margin: 10px 0;
+  border-collapse: collapse;
 }
 
-.data-table th, .data-table td {
-    border: 1px solid #0f0;
-    padding: 8px;
-    text-align: left;
+.data-table th,
+.data-table td {
+  padding: 8px;
+  border: 1px solid var(--matrix-green);
+  text-align: left;
+}
+
+.data-table th {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+.author-name {
+  color: var(--danger-red);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
