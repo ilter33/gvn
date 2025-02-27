@@ -23,6 +23,10 @@ body {
   margin: 0 auto;
 }
 
+#dorkSection {
+    display: none;
+}
+
 .matrix-header {
   text-align: center;
   margin-bottom: 20px;
