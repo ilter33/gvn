@@ -1,92 +1,37 @@
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Güvenlik Açığı Tarayıcı</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güvenlik Tarayıcı</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <nav class="nav-menu">
-      <a href="#" class="active" onclick="showPage('scanner')">Dork Tarayıcı</a>
-      <a href="#" onclick="showPage('exploit')">SQL/XSS Sömürücü</a>
-    </nav>
+    <h1>Güvenlik Açığı Tarayıcı</h1>
+    <input type="text" id="urlInput" placeholder="URL girin...">
+    <button id="startScanBtn">Taramayı Başlat</button>
+    <pre id="scanResults"></pre><script>
+    document.getElementById("startScanBtn").addEventListener("click", async function() {
+        const url = document.getElementById("urlInput").value;
+        if (!url) {
+            alert("Lütfen bir URL girin!");
+            return;
+        }
 
-    <div id="scanner-page">
-      <h1 class="matrix-header">Güvenlik Açığı Tarayıcı</h1>
-      
-      <div class="controls">
-        <select id="dorkType">
-          <option value="">Güvenlik Açığı Türü Seçin</option>
-          <option value="sqli">SQL Enjeksiyonu</option>
-          <option value="xss">XSS (Siteler Arası Betik)</option>
-          <option value="rfi">RFI (Uzak Dosya İçerme)</option>
-          <option value="lfi">LFI (Yerel Dosya İçerme)</option>
-        </select>
+        try {
+            const response = await fetch("https://your-backend-url.onrender.com/scan", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url })
+            });
 
-        <div class="button-group">
-          <button id="startSearchBtn" class="start-btn" disabled>Aramayı Başlat</button>
-          <button id="stopSearchBtn" class="stop-btn" disabled>Aramayı Durdur</button>
-        </div>
-
-        <div class="button-group">
-          <button id="startScanBtn" class="start-btn" disabled>Taramayı Başlat</button>
-          <button id="stopScanBtn" class="stop-btn" disabled>Taramayı Durdur</button>
-        </div>
-      </div>
-
-      <div class="console-window">
-        <h3 class="console-title">İşlem Konsolu</h3>
-        <div id="consoleContent" class="console-content"></div>
-      </div>
-    </div>
-
-    <div id="exploit-page" style="display:none">
-      <h1 class="matrix-header">Güvenlik Açığı Sömürücü</h1>
-      
-      <div class="controls">
-        <select id="exploitType">
-          <option value="">Saldırı Türü Seçin</option>
-          <option value="sqli">SQL Enjeksiyonu</option>
-          <option value="xss">XSS (Siteler Arası Betik)</option>
-          <option value="rfi">RFI (Uzak Dosya İçerme)</option>
-          <option value="lfi">LFI (Yerel Dosya İçerme)</option>
-        </select>
-        
-        <input type="text" id="targetUrl" placeholder="Hedef URL'yi Girin" class="matrix-input">
-
-        <div class="button-group">
-          <button id="startExploitBtn" class="start-btn">Saldırıyı Başlat</button>
-          <button id="stopExploitBtn" class="stop-btn" disabled>Saldırıyı Durdur</button>
-        </div>
-      </div>
-
-      <div class="console-window">
-        <h3 class="console-title">Sömürü Konsolu</h3>
-        <div id="exploitConsole" class="console-content"></div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <span class="author-name">Khingila</span> tarafından kodlandı
-      <br>
-      Sadece eğitim amaçlı kişisel kullanım içindir
-    </div>
-  </div>
-
-  <script type="module">
-    import { initMatrixRain } from './js/matrix.js';
-    import './js/main.js';
-    import './js/exploit.js';
-    
-    initMatrixRain();
-
-        const dorkSection = document.getElementById('dorkSection');
-        if (dorkSection.style.display === 'none') {
-            dorkSection.style.display = 'block';
-        } else {
-            dorkSection.style.display = 'none';
+            const data = await response.json();
+            document.getElementById("scanResults").innerText = data.result || data.error;
+        } catch (error) {
+            console.error("Tarama hatası:", error);
+            alert("Tarama sırasında bir hata oluştu.");
         }
     });
-  </script>
+</script>
+
 </body>
 </html>
