@@ -23,21 +23,6 @@
           <option value="lfi">LFI (Yerel Dosya İçerme)</option>
         </select>
 
-        <!-- Butonlar -->
-        <button id="HedefDesenBtn">Buton</button>
-
-        <!-- Dorklar kısmı -->
-        <div id="dorkSection" style="display:none;">
-            <!-- Dork içerikleri burada olacak -->
-        </div>
-
-        <!-- Dorkları Göster Butonu -->
-        <button id="dorkToggleButton">Dorkları Göster</button>
-
-        <select id="dorkList" disabled>
-          <option value="">Hedef Desen Seçin</option>
-        </select>
-
         <div class="button-group">
           <button id="startSearchBtn" class="start-btn" disabled>Aramayı Başlat</button>
           <button id="stopSearchBtn" class="stop-btn" disabled>Aramayı Durdur</button>
@@ -95,13 +80,6 @@
     
     initMatrixRain();
 
-    // Buton işlevselliği
-    document.getElementById('HedefDesenBtn').addEventListener('click', function() {
-        alert('Butona tıkladınız!');
-    });
-
-    // Dorklar kısmını açma
-    document.getElementById('dorkToggleButton').addEventListener('click', function() {
         const dorkSection = document.getElementById('dorkSection');
         if (dorkSection.style.display === 'none') {
             dorkSection.style.display = 'block';
