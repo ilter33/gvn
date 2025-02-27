@@ -1,37 +1,53 @@
-<!DOCTYPE html><html lang="tr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Güvenlik Tarayıcı</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Dork Maker SQL XSS Scanner</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Güvenlik Açığı Tarayıcı</h1>
-    <input type="text" id="urlInput" placeholder="URL girin...">
-    <button id="startScanBtn">Taramayı Başlat</button>
-    <pre id="scanResults"></pre><script>
-    document.getElementById("startScanBtn").addEventListener("click", async function() {
-        const url = document.getElementById("urlInput").value;
-        if (!url) {
-            alert("Lütfen bir URL girin!");
-            return;
-        }
+  <div class="container">
+    <h1 class="matrix-header">Dork Maker SQL XSS Scanner</h1>
+    
+    <div class="controls">
+      <select id="dorkType">
+        <option value="">Select Vulnerability Type</option>
+        <option value="sqli">SQL Injection</option>
+        <option value="xss">Cross-Site Scripting (XSS)</option>
+      </select>
+      
+      <select id="dorkList" disabled>
+        <option value="">Select Target Pattern</option>
+      </select>
 
-        try {
-            const response = await fetch("https://your-backend-url.onrender.com/scan", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ url })
-            });
+      <div class="button-group">
+        <button id="startSearchBtn" class="start-btn" disabled>Start Search</button>
+        <button id="stopSearchBtn" class="stop-btn" disabled>Stop Search</button>
+      </div>
 
-            const data = await response.json();
-            document.getElementById("scanResults").innerText = data.result || data.error;
-        } catch (error) {
-            console.error("Tarama hatası:", error);
-            alert("Tarama sırasında bir hata oluştu.");
-        }
-    });
-</script>
+      <div class="button-group">
+        <button id="startScanBtn" class="start-btn" disabled>Start Infiltration</button>
+        <button id="stopScanBtn" class="stop-btn" disabled>Stop Infiltration</button>
+      </div>
+    </div>
 
+    <div class="console-window">
+      <h3 class="console-title">Operation Console</h3>
+      <div id="consoleContent" class="console-content"></div>
+    </div>
+
+    <div class="footer">
+      Coded by <span class="author-name">Khingila</span>
+      <br>
+      For personal use for educational purposes
+    </div>
+  </div>
+
+  <script type="module">
+    import { initMatrixRain } from './js/matrix.js';
+    import './js/main.js';
+
+    // Initialize the Matrix rain effect
+    initMatrixRain();
+  </script>
 </body>
 </html>
