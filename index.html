@@ -1,52 +1,87 @@
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Dork Maker SQL XSS Scanner</title>
+  <title>Güvenlik Açığı Tarayıcı</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="matrix-header">Dork Maker SQL XSS Scanner</h1>
-    
-    <div class="controls">
-      <select id="dorkType">
-        <option value="">Select Vulnerability Type</option>
-        <option value="sqli">SQL Injection</option>
-        <option value="xss">Cross-Site Scripting (XSS)</option>
-      </select>
-      
-      <select id="dorkList" disabled>
-        <option value="">Select Target Pattern</option>
-      </select>
+    <nav class="nav-menu">
+      <a href="#" class="active" onclick="showPage('scanner')">Dork Tarayıcı</a>
+      <a href="#" onclick="showPage('exploit')">SQL/XSS Sömürücü</a>
+    </nav>
 
-      <div class="button-group">
-        <button id="startSearchBtn" class="start-btn" disabled>Start Search</button>
-        <button id="stopSearchBtn" class="stop-btn" disabled>Stop Search</button>
+    <div id="scanner-page">
+      <h1 class="matrix-header">Güvenlik Açığı Tarayıcı</h1>
+      
+      <div class="controls">
+        <select id="dorkType">
+          <option value="">Güvenlik Açığı Türü Seçin</option>
+          <option value="sqli">SQL Enjeksiyonu</option>
+          <option value="xss">XSS (Siteler Arası Betik)</option>
+          <option value="rfi">RFI (Uzak Dosya İçerme)</option>
+          <option value="lfi">LFI (Yerel Dosya İçerme)</option>
+        </select>
+        
+        <select id="dorkList" disabled>
+          <option value="">Hedef Desen Seçin</option>
+        </select>
+
+        <div class="button-group">
+          <button id="startSearchBtn" class="start-btn" disabled>Aramayı Başlat</button>
+          <button id="stopSearchBtn" class="stop-btn" disabled>Aramayı Durdur</button>
+        </div>
+
+        <div class="button-group">
+          <button id="startScanBtn" class="start-btn" disabled>Taramayı Başlat</button>
+          <button id="stopScanBtn" class="stop-btn" disabled>Taramayı Durdur</button>
+        </div>
       </div>
 
-      <div class="button-group">
-        <button id="startScanBtn" class="start-btn" disabled>Start Infiltration</button>
-        <button id="stopScanBtn" class="stop-btn" disabled>Stop Infiltration</button>
+      <div class="console-window">
+        <h3 class="console-title">İşlem Konsolu</h3>
+        <div id="consoleContent" class="console-content"></div>
       </div>
     </div>
 
-    <div class="console-window">
-      <h3 class="console-title">Operation Console</h3>
-      <div id="consoleContent" class="console-content"></div>
+    <div id="exploit-page" style="display:none">
+      <h1 class="matrix-header">Güvenlik Açığı Sömürücü</h1>
+      
+      <div class="controls">
+        <select id="exploitType">
+          <option value="">Saldırı Türü Seçin</option>
+          <option value="sqli">SQL Enjeksiyonu</option>
+          <option value="xss">XSS (Siteler Arası Betik)</option>
+          <option value="rfi">RFI (Uzak Dosya İçerme)</option>
+          <option value="lfi">LFI (Yerel Dosya İçerme)</option>
+        </select>
+        
+        <input type="text" id="targetUrl" placeholder="Hedef URL'yi Girin" class="matrix-input">
+
+        <div class="button-group">
+          <button id="startExploitBtn" class="start-btn">Saldırıyı Başlat</button>
+          <button id="stopExploitBtn" class="stop-btn" disabled>Saldırıyı Durdur</button>
+        </div>
+      </div>
+
+      <div class="console-window">
+        <h3 class="console-title">Sömürü Konsolu</h3>
+        <div id="exploitConsole" class="console-content"></div>
+      </div>
     </div>
 
     <div class="footer">
-      Coded by <span class="author-name">Khingila</span>
+      <span class="author-name">Khingila</span> tarafından kodlandı
       <br>
-      For personal use for educational purposes
+      Sadece eğitim amaçlı kişisel kullanım içindir
     </div>
   </div>
 
   <script type="module">
     import { initMatrixRain } from './js/matrix.js';
     import './js/main.js';
-
-    // Initialize the Matrix rain effect
+    import './js/exploit.js';
+    
     initMatrixRain();
   </script>
 </body>
