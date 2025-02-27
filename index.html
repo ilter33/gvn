@@ -24,33 +24,16 @@
         </select>
 
         <!-- Butonlar -->
-<button id="Hedef Desen Seçin">Buton</button>
+        <button id="HedefDesenBtn">Buton</button>
 
-<!-- Dorklar kısmı -->
-<div id="dorkSection" style="display:none;">
-    <!-- Dork içerikleri burada olacak -->
-</div>
+        <!-- Dorklar kısmı -->
+        <div id="dorkSection" style="display:none;">
+            <!-- Dork içerikleri burada olacak -->
+        </div>
 
-<!-- Dorkları Göster Butonu -->
-<button id="dorkToggleButton">Dorkları Göster</button>
+        <!-- Dorkları Göster Butonu -->
+        <button id="dorkToggleButton">Dorkları Göster</button>
 
-    <script>
-    // Buton işlevselliği
-    document.getElementById('Hedef Desen Seçin').addEventListener('click', function() {
-        alert('Butona tıkladınız!');
-    });
-
-    // Dorklar kısmını açma
-    document.getElementById('dorkToggleButton').addEventListener('click', function() {
-        const dorkSection = document.getElementById('dorkSection');
-        if (dorkSection.style.display === 'none') {
-            dorkSection.style.display = 'block';
-        } else {
-            dorkSection.style.display = 'none';
-        }
-    });
-</script>
-          
         <select id="dorkList" disabled>
           <option value="">Hedef Desen Seçin</option>
         </select>
@@ -111,6 +94,21 @@
     import './js/exploit.js';
     
     initMatrixRain();
+
+    // Buton işlevselliği
+    document.getElementById('HedefDesenBtn').addEventListener('click', function() {
+        alert('Butona tıkladınız!');
+    });
+
+    // Dorklar kısmını açma
+    document.getElementById('dorkToggleButton').addEventListener('click', function() {
+        const dorkSection = document.getElementById('dorkSection');
+        if (dorkSection.style.display === 'none') {
+            dorkSection.style.display = 'block';
+        } else {
+            dorkSection.style.display = 'none';
+        }
+    });
   </script>
 </body>
 </html>
